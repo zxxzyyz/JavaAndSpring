@@ -2,7 +2,6 @@ package hello.hellospring.service;
 
 import hello.hellospring.domain.Member;
 import hello.hellospring.repository.MemberRepository;
-import hello.hellospring.repository.MemoryMemberRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,7 +20,7 @@ public class MemberService {
     }
 
     private void validateDuplicateMember(Member member) {
-        memberRepository.findbyName(member.getName()).ifPresent(member1 -> {
+        memberRepository.findByName(member.getName()).ifPresent(member1 -> {
             throw new IllegalStateException("Existing member");
         });
     }
