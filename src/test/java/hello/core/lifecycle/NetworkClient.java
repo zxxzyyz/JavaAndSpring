@@ -3,6 +3,8 @@ package hello.core.lifecycle;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.management.remote.JMXServerErrorException;
 
 public class NetworkClient {
@@ -28,10 +30,12 @@ public class NetworkClient {
         System.out.println("disconnect... url = " + url);
     }
 
+    @PreDestroy
     public void close() throws Exception {
         disconnect();
     }
 
+    @PostConstruct
     public void init() throws Exception {
         connect();
         call("Initialize message");
