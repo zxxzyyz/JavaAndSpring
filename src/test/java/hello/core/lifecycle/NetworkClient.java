@@ -5,7 +5,7 @@ import org.springframework.beans.factory.InitializingBean;
 
 import javax.management.remote.JMXServerErrorException;
 
-public class NetworkClient implements InitializingBean, DisposableBean {
+public class NetworkClient {
     private  String url;
 
     public NetworkClient() {
@@ -28,13 +28,11 @@ public class NetworkClient implements InitializingBean, DisposableBean {
         System.out.println("disconnect... url = " + url);
     }
 
-    @Override
-    public void destroy() throws Exception {
+    public void close() throws Exception {
         disconnect();
     }
 
-    @Override
-    public void afterPropertiesSet() throws Exception {
+    public void init() throws Exception {
         connect();
         call("Initialize message");
     }
