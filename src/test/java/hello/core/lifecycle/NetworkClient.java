@@ -1,14 +1,15 @@
 package hello.core.lifecycle;
 
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
+
 import javax.management.remote.JMXServerErrorException;
 
-public class NetworkClient {
+public class NetworkClient implements InitializingBean, DisposableBean {
     private  String url;
 
     public NetworkClient() {
         System.out.println("constructor... url = " + url);
-        connect();
-        call("Initialize message");
     }
 
     public void setUrl(String url) {
@@ -25,5 +26,16 @@ public class NetworkClient {
 
     public void disconnect() {
         System.out.println("disconnect... url = " + url);
+    }
+
+    @Override
+    public void destroy() throws Exception {
+        disconnect();
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        connect();
+        call("Initialize message");
     }
 }
