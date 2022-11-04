@@ -2,12 +2,14 @@ package hello.core.scope;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Scope;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.inject.Provider;
 
 public class SingletonWithPrototypeTest {
 
@@ -30,19 +32,38 @@ public class SingletonWithPrototypeTest {
         int count1 = bean1.logic();
         int count2 = bean2.logic();
         Assertions.assertThat(count1).isEqualTo(1);
-        Assertions.assertThat(count2).isEqualTo(2);
+        Assertions.assertThat(count2).isEqualTo(1);
     }
 
     @Scope("singleton")
     static class SingletonBean {
-        private final PrototypeBean prototypeBean;
+
+        /*
+
+        Spring - ObjectProvider
+
+        private ObjectProvider<PrototypeBean> prototypeBeanProvider;
 
         @Autowired
-        public SingletonBean(PrototypeBean prototypeBean) {
-            this.prototypeBean = prototypeBean;
+        public SingletonBean(ObjectProvider<PrototypeBean> prototypeBeanProvider) {
+            this.prototypeBeanProvider = prototypeBeanProvider;
+        }
+
+        */
+
+        // JSR330 - Provider
+
+        private final Provider<PrototypeBean> prototypeBeanProvider;
+
+        @Autowired
+        public SingletonBean(Provider<PrototypeBean> prototypeBeanProvider) {
+            this.prototypeBeanProvider = prototypeBeanProvider;
         }
 
         public int logic() {
+            // Spring: PrototypeBean prototypeBean = prototypeBeanProvider.getObject();
+            // JSR330
+            PrototypeBean prototypeBean = prototypeBeanProvider.get();
             prototypeBean.addCount();
             return prototypeBean.getCount();
         }
