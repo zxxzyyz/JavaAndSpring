@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 @Slf4j
@@ -31,9 +32,15 @@ public class HomeController {
 
     @GetMapping("/")
     public String homeLogin(HttpServletRequest req, Model model) {
-        Member member = (Member) sessionManager.getSession(req);
+
+        HttpSession session = req.getSession(false);
+        if (session == null) return "home";
+
+        Member member = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
         if (member == null) return "home";
+
         model.addAttribute("member", member);
+
         return "loginHome";
     }
 }
