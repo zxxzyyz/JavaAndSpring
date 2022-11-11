@@ -55,7 +55,7 @@ public class LoginController {
     public String login(
             @Valid @ModelAttribute("loginForm") LoginForm form,
             BindingResult bindingResult,
-            @RequestParam(defaultValue = "/") String requestURL,
+            @RequestParam(defaultValue = "/") String redirectURL,
             HttpServletRequest req) {
         if (bindingResult.hasErrors()) {
             return "login/loginForm";
@@ -72,7 +72,7 @@ public class LoginController {
         // store info into session
         session.setAttribute(SessionConst.LOGIN_MEMBER, loginMember);
 
-        return "redirect:" + requestURL;
+        return "redirect:" + redirectURL;
     }
 
     /*
