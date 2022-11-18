@@ -13,7 +13,7 @@ public class OrderService {
     private final OrderRepository orderRepository;
 
     @Transactional
-    public void order(Order order) throws NotEnoughMoneyException {
+    public void order(final Order order) throws NotEnoughMoneyException {
         log.info("order 호출");
         orderRepository.save(order);
         log.info("결제 프로세스 진입");
