@@ -1,6 +1,7 @@
 package hello.Jpa1.domain.item;
 
 import hello.Jpa1.domain.Category;
+import hello.Jpa1.exception.NotEnoughStockException;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,4 +27,16 @@ public abstract class Item {
 
     @ManyToMany(mappedBy = "items")
     private List<Category> categories = new ArrayList<>();
+
+    public void addStock(int quantity) {
+        this.stockQuantity += quantity;
+    }
+
+    public void removeStock(int quantity) {
+        int leftStock = this.stockQuantity - quantity;
+        if (leftStock < 0) {
+            throw new NotEnoughStockException("No enough stocks in inventory");
+        }
+        this.stockQuantity = leftStock;
+    }
 }
