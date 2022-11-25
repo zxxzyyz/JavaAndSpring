@@ -1,5 +1,6 @@
 package hello.Jpa1;
 
+import hello.Jpa1.domain.Member;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
