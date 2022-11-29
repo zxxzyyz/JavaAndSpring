@@ -6,8 +6,7 @@ import hello.Jpa1.domain.Order;
 import hello.Jpa1.domain.OrderStatus;
 import hello.Jpa1.domain.QMember;
 import hello.Jpa1.domain.QOrder;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import hello.Jpa1.repository.order.simplequery.OrderSimpleQueryDto;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
@@ -56,5 +55,9 @@ public class OrderRepository {
     private BooleanExpression nameLike(String nameCond) {
         if (!StringUtils.hasText(nameCond)) return null;
         return QMember.member.name.like("%" + nameCond + "%");
+    }
+
+    public List<Order> findAllFetchMemberDelivery(OrderSearch orderSearch) {
+        return em.createQuery("SELECT o FROM Order o JOIN FETCH o.member m JOIN FETCH o.delivery d", Order.class).getResultList();
     }
 }
