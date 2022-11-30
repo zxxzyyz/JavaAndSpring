@@ -10,7 +10,7 @@ import javax.persistence.*;
 @ToString(of = {"id", "username", "age"})
 //    @NamedEntityGraph(name = "Member.all", attributeNodes = @NamedAttributeNode("team"))
 //    @NamedQuery(name="Member.findByUsername", query="select m from Member m where m.username = :username")
-public class Member {
+public class Member extends BaseDraftEntity {
     @Id @GeneratedValue
     @Column(name = "member_id")
     private Long id;
