@@ -4,10 +4,14 @@ import jpa.springjpa.entity.Member;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Slice;
+import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -42,6 +46,7 @@ public class MemberRepositoryTest {
         //리스트 조회 검증
         List<Member> all = memberRepository.findAll();
         assertThat(all.size()).isEqualTo(2);
+        memberRepository.any7(Arrays.asList("1", "2"));
 
         //카운트 검증
         long count = memberRepository.count();
@@ -52,5 +57,38 @@ public class MemberRepositoryTest {
         memberRepository.delete(member2);
         long deletedCount = memberRepository.count();
         assertThat(deletedCount).isEqualTo(0);
+    }
+
+    @Test
+    void paging() {
+        memberRepository.save(new Member("member1", 10));
+        memberRepository.save(new Member("member2", 10));
+        memberRepository.save(new Member("member3", 10));
+        memberRepository.save(new Member("member4", 10));
+        memberRepository.save(new Member("member5", 10));
+
+        int age = 10;
+        // 가능하면 Order By 쿼리 사용
+        PageRequest pageRequest = PageRequest.of(0, 3, Sort.by(Sort.Direction.DESC, "username"));
+
+        Page<Member> page = memberRepository.findUsePageByAge(age, pageRequest);
+        Slice<Member> slice = memberRepository.findUseSliceByAge(age, pageRequest);
+        // List<Member> members = page.getContent();
+        // List<Member> members = slice.getContent();
+        for (Member member : page) {
+            System.out.println("member = " + member);
+        }
+
+        assertThat(page.getSize()).isEqualTo(3);
+        assertThat(page.getTotalElements()).isEqualTo(5);
+        assertThat(page.getNumber()).isEqualTo(0);
+        assertThat(page.getTotalPages()).isEqualTo(2);
+        assertThat(page.isFirst()).isTrue();
+        assertThat(page.hasNext()).isTrue();
+
+        assertThat(slice.getSize()).isEqualTo(3);
+        assertThat(slice.getNumber()).isEqualTo(0);
+        assertThat(slice.isFirst()).isTrue();
+        assertThat(slice.hasNext()).isTrue();
     }
 }

@@ -1,7 +1,7 @@
 package jpa.springjpa.repository;
 
 import jpa.springjpa.entity.Team;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -9,9 +9,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
+@RequiredArgsConstructor
 public class TeamJpaRepository {
-    @Autowired
-    private EntityManager em;
+    private final EntityManager em;
 
     public Team save(Team team) {
         em.persist(team);

@@ -1,7 +1,7 @@
 package jpa.springjpa.repository;
 
 import jpa.springjpa.entity.Member;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -9,9 +9,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
+@RequiredArgsConstructor
 public class MemberJpaRepository {
-    @Autowired
-    private EntityManager em;
+
+    private final EntityManager em;
 
     public Member save(Member member) {
         em.persist(member);
@@ -39,5 +40,18 @@ public class MemberJpaRepository {
 
     public Member find(Long id) {
         return em.find(Member.class, id);
+    }
+
+    public List<Member> findByPage(int age, int offset, int limit) {
+
+        return em.createQuery("select m from Member m where m.age = :age order by m.username desc", Member.class)
+                .setParameter("age", age)
+                .setFirstResult(offset)
+                .setMaxResults(limit)
+                .getResultList();
+    }
+    public long totalCount(int age) {
+        return em.createQuery("select count(m) from Member m where m.age = :age", Long.class)
+                .setParameter("age", age).getSingleResult();
     }
 }
