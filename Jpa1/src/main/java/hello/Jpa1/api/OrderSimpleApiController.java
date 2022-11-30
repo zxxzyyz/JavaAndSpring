@@ -66,7 +66,7 @@ public class OrderSimpleApiController {
      */
     @GetMapping("/api/v3/simple-orders")
     public Result orderV3() {
-        List<OrderSimpleQueryDto> collect = orderRepository.findAllFetchMemberDelivery(new OrderSearch()).stream().map(OrderSimpleQueryDto::new).collect(Collectors.toList());
+        List<OrderSimpleQueryDto> collect = orderRepository.findAllFetchMemberDelivery().stream().map(OrderSimpleQueryDto::new).collect(Collectors.toList());
         return new Result(collect.size(), collect);
     }
 
