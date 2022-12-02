@@ -15,11 +15,13 @@ public class LoginService {
     private final RefreshTokenRepository refreshTokenRepository;
 
     public LoginResult login(User user) {
+        System.out.println("LoginService.login");
         User saveUser = userRepository.save(user);
         Long id = saveUser.getId();
 
         String accessToken = jwtProvider.createAccessToken(id, saveUser.getRole());
         RefreshToken refreshToken = refreshTokenProvider.createToken(id);
-
+        refreshTokenRepository.save(refreshToken);
+        return new LoginResult(refreshToken.getRefreshToken(), accessToken, saveUser);
     }
 }

@@ -20,3 +20,10 @@ logging:
     org.hibernate.sql: info
     #org.hibernate.type: trace
     root: info
+
+security:
+  jwt:
+    secret-key: OneLetterIsEightBytes.PleaseSet32Letters
+    expire-length: 30000
+  refresh:
+    expire-length: 30000

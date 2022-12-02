@@ -13,6 +13,7 @@ public class RefreshTokenRepositoryImpl implements RefreshTokenRepository {
 
     @Override
     public RefreshToken save(RefreshToken refreshToken) {
+        System.out.println("RefreshTokenRepositoryImpl.save");
         String sql = "INSERT INTO refresh_token VALUES (:refreshToken, :expireTime, :userId)";
         BeanPropertySqlParameterSource param = new BeanPropertySqlParameterSource(refreshToken);
         int updatedRows = jdbcTemplate.update(sql, param);
