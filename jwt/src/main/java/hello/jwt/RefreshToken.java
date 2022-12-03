@@ -20,6 +20,10 @@ public class RefreshToken {
         this.expireTime = expireTime;
     }
 
+    public boolean isExpired() {
+        return expireTime.isBefore(LocalDateTime.now());
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

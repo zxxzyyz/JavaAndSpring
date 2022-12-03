@@ -3,12 +3,16 @@ package hello.jwt;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Locale;
 
 @RequestMapping
 @RestController
@@ -36,7 +40,7 @@ public class LoginController {
         return "admin";
     }
 
-    @PostMapping("login")
+    @PostMapping("/login")
     public ResponseEntity<LoginResponse> login() {
         User user = new User();
         user.setUsername("name");
@@ -52,5 +56,37 @@ public class LoginController {
         return ResponseEntity.ok()
                 .header(HttpHeaders.SET_COOKIE, cookie.toString())
                 .body(LoginResponse.from(loginResult));
+    }
+
+    @PostMapping("/refresh")
+    public ResponseEntity<TokenResponse> refresh(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            HttpMethod httpMethod,
+            Locale locale,
+            @RequestHeader MultiValueMap<String,String> headerMap,
+            @RequestHeader("host") String host,
+            @CookieValue(value = RefreshTokenCookieProvider.REFRESH_TOKEN, required = false) String refreshToken) {
+
+        System.out.println("request=" + request);
+        System.out.println("response=" + response);
+        System.out.println("httpMethod=" + httpMethod);
+        System.out.println("locale=" + locale);
+        System.out.println("headerMap=" + headerMap);
+        System.out.println("header host="+ host);
+        Cookie[] cookies = request.getCookies();
+        for (Cookie cookie : cookies) {
+            System.out.println("cookie = " + cookie);
+        }
+        System.out.println("myCookie=" + refreshToken);
+
+        if (refreshToken == null) throw new RuntimeException();
+        TokenResult tokenResult = loginService.refresh(refreshToken);
+        ResponseCookie cookie = refreshTokenCookieProvider.createCookie(
+                tokenResult.getRefreshToken()
+        );
+        return ResponseEntity.ok()
+                .header(HttpHeaders.SET_COOKIE, cookie.toString())
+                .body(new TokenResponse(tokenResult.getAccessToken()));
     }
 }

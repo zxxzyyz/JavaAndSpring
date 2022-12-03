@@ -10,7 +10,7 @@ import java.time.Duration;
 
 @Component
 public class RefreshTokenCookieProvider {
-    private static final String REFRESH_TOKEN ="refreshToken";
+    protected static final String REFRESH_TOKEN ="refreshToken";
     private final Long expiredMills;
 
     public RefreshTokenCookieProvider(

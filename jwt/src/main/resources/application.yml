@@ -24,6 +24,6 @@ logging:
 security:
   jwt:
     secret-key: OneLetterIsEightBytes.PleaseSet32Letters
-    expire-length: 30000
+    expire-length: 86400000
   refresh:
-    expire-length: 30000
+    expire-length: 86400000
