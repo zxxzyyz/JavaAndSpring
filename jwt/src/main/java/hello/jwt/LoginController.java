@@ -60,25 +60,8 @@ public class LoginController {
 
     @PostMapping("/refresh")
     public ResponseEntity<TokenResponse> refresh(
-            HttpServletRequest request,
-            HttpServletResponse response,
-            HttpMethod httpMethod,
-            Locale locale,
-            @RequestHeader MultiValueMap<String,String> headerMap,
-            @RequestHeader("host") String host,
-            @CookieValue(value = RefreshTokenCookieProvider.REFRESH_TOKEN, required = false) String refreshToken) {
-
-        System.out.println("request=" + request);
-        System.out.println("response=" + response);
-        System.out.println("httpMethod=" + httpMethod);
-        System.out.println("locale=" + locale);
-        System.out.println("headerMap=" + headerMap);
-        System.out.println("header host="+ host);
-        Cookie[] cookies = request.getCookies();
-        for (Cookie cookie : cookies) {
-            System.out.println("cookie = " + cookie);
-        }
-        System.out.println("myCookie=" + refreshToken);
+            @CookieValue(value = RefreshTokenCookieProvider.REFRESH_TOKEN, required = false)
+            String refreshToken) {
 
         if (refreshToken == null) throw new RuntimeException();
         TokenResult tokenResult = loginService.refresh(refreshToken);
@@ -88,5 +71,17 @@ public class LoginController {
         return ResponseEntity.ok()
                 .header(HttpHeaders.SET_COOKIE, cookie.toString())
                 .body(new TokenResponse(tokenResult.getAccessToken()));
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<Void> logout(
+            @CookieValue(value = RefreshTokenCookieProvider.REFRESH_TOKEN, required = false)
+            String refreshToken) {
+        if (refreshToken == null) throw new RuntimeException();
+        return ResponseEntity.noContent()
+                .header(
+                    HttpHeaders.SET_COOKIE,
+                    refreshTokenCookieProvider.createExpiredCookie().toString())
+                .build();
     }
 }

@@ -40,4 +40,10 @@ public class RefreshTokenCookieProvider {
         System.out.println("builder.sameSite() = " + builder.toString());
         return builder;
     }
+
+    public ResponseCookie createExpiredCookie() {
+        return createCookieBuilder("")
+                .maxAge(0)
+                .build();
+    }
 }
