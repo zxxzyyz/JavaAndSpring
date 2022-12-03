@@ -25,7 +25,17 @@ public class Config implements WebMvcConfigurer {
     }
 
     @Override
+    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
+        System.out.println("Config.addArgumentResolvers");
+        resolvers.addAll(this.resolvers);
+        for (HandlerMethodArgumentResolver resolver : this.resolvers) {
+            System.out.println("resolver = " + resolver);
+        }
+    }
+
+    @Override
     public void addInterceptors(InterceptorRegistry registry) {
+        System.out.println("Config.addInterceptors");
         interceptors.forEach(registry::addInterceptor);
     }
 

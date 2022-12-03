@@ -1,18 +1,10 @@
 package hello.jwt;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.Locale;
 
 @RequestMapping
 @RestController
@@ -85,5 +77,14 @@ public class LoginController {
                     HttpHeaders.SET_COOKIE,
                     refreshTokenCookieProvider.createExpiredCookie().toString())
                 .build();
+    }
+
+    @GetMapping("/verified")
+    @Login
+    public ResponseEntity<UserPayload> verified(@Verified UserPayload user) {
+        Long id = user.getId();
+        String role = user.getRole();
+        UserPayload result = new UserPayload(id, role);
+        return ResponseEntity.ok(result);
     }
 }
