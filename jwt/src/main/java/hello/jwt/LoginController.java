@@ -28,12 +28,14 @@ public class LoginController {
         return "home";
     }
 
+    @Login
     @GetMapping("/user")
     public String user() {
         System.out.println("LoginController.user");
         return "user";
     }
 
+    @Login(admin = true)
     @GetMapping("/admin")
     public String admin() {
         System.out.println("LoginController.admin");
