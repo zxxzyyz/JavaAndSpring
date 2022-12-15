@@ -1,7 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1a22341e-1a1f-4f91-9fd1-832db72371ee" name="Changes" comment="Spring Security... section 6~8(fixing)" />
+    <list default="true" id="1a22341e-1a1f-4f91-9fd1-832db72371ee" name="Changes" comment="Spring Security... section 12~13">
+      <change afterPath="$PROJECT_DIR$/../QuizApp/src/docs/asciidoc/index.adoc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuizApp/src/main/java/Koo/QuizApp/application/QuizService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuizApp/src/main/java/Koo/QuizApp/common/FileLoader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuizApp/src/main/java/Koo/QuizApp/domain/BaseDraftEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuizApp/src/main/java/Koo/QuizApp/domain/BaseTimeEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuizApp/src/main/java/Koo/QuizApp/domain/answer/Answer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuizApp/src/main/java/Koo/QuizApp/domain/choice/Choice.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuizApp/src/main/java/Koo/QuizApp/domain/quiz/Difficulty.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuizApp/src/main/java/Koo/QuizApp/domain/quiz/Quiz.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuizApp/src/main/java/Koo/QuizApp/domain/quiz/QuizRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuizApp/src/main/java/Koo/QuizApp/domain/user/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuizApp/src/main/java/Koo/QuizApp/domain/user/UserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuizApp/src/main/java/Koo/QuizApp/dto/request/quiz/QuizRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuizApp/src/main/java/Koo/QuizApp/dto/response/quiz/QuizResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuizApp/src/main/java/Koo/QuizApp/exception/ErrorCode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuizApp/src/main/java/Koo/QuizApp/exception/QuizAppException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuizApp/src/main/java/Koo/QuizApp/exception/badrequest/InvalidFileContentTypeException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuizApp/src/main/java/Koo/QuizApp/exception/badrequest/InvalidValueException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuizApp/src/main/java/Koo/QuizApp/exception/internalserver/FileProcessingException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuizApp/src/main/java/Koo/QuizApp/exception/internalserver/InternalServerException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuizApp/src/main/java/Koo/QuizApp/exception/notfound/NotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuizApp/src/main/java/Koo/QuizApp/exception/notfound/QuizNotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuizApp/src/main/java/Koo/QuizApp/presentation/api/QuizApiController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../QuizApp/src/test/java/Koo/QuizApp/presentation/api/QuizApiControllerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../jwt/src/test/java/hello/jwt/LoginControllerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../queryAOP/src/main/java/hello/queryAOP/ApiQueryCounter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../queryAOP/src/main/java/hello/queryAOP/ApiQueryCounterAspect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../queryAOP/src/main/java/hello/queryAOP/ConnectionInvocationHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../queryAOP/src/main/java/hello/queryAOP/LoggingFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../queryAOP/src/main/java/hello/queryAOP/MaskingPatternLayout.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../queryAOP/src/main/java/hello/queryAOP/PreparedStatementInvocationHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../queryAOP/src/main/java/hello/queryAOP/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../queryAOP/src/main/java/hello/queryAOP/UserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../queryAOP/src/main/java/hello/queryAOP/UserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../queryAOP/src/main/resources/logback-spring.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../queryAOP/src/main/resources/logback/console-appender.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MemberItemApp/src/main/java/Basic/MemberItemApp/controller/MemberController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MemberItemApp/src/main/java/Basic/MemberItemApp/controller/MemberController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../item-service-message/src/test/java/hello/itemservice/message/MessageSourcesTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../item-service-message/src/test/java/hello/itemservice/message/MessageSourcesTest.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -25,13 +64,13 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -41,6 +80,7 @@
       <option name="presentableId" value="Default" />
       <updated>1669421708659</updated>
       <workItem from="1669421710001" duration="191000" />
+      <workItem from="1670855836975" duration="209000" />
     </task>
     <task id="LOCAL-00001" summary="Spring Security... section 6~8(fixing)">
       <created>1669421848696</created>
@@ -49,7 +89,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669421848696</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Spring Security... section 12~13">
+      <created>1670855959365</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1670855959365</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -68,6 +115,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Spring Security... section 6~8(fixing)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Spring Security... section 6~8(fixing)" />
+    <MESSAGE value="Spring Security... section 12~13" />
+    <option name="LAST_COMMIT_MESSAGE" value="Spring Security... section 12~13" />
   </component>
 </project>
